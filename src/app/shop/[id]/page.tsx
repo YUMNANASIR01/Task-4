@@ -3,7 +3,7 @@ import Spmain from "@/components/spmain/Spmain";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Productdetails from "@/components/productdetails/Productdetails";
-import Relatedproducts from "@/components/relatedProduct/Relatedproducts";
+import Relatedproducts from "@/components/relatedProduct/Relatedproducts"
 
 // Page Component
 export default async function SingleProduct({searchParams}: 

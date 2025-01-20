@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
+import CommentSection from "../comment.tsx/page";
 
 export default function ProductDetails({productImage} : {productImage: string}) {
   const [products, setProducts] = useState([]);
@@ -18,6 +19,7 @@ export default function ProductDetails({productImage} : {productImage: string}) 
   }, []);
 
   return (
+    <>
     <div className="max-w-7xl mx-auto px-2 exsm:px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       {/* Tabs for Description, Additional Information, and Reviews */}
       <Tabs defaultValue="description" className="w-full">
@@ -81,5 +83,7 @@ export default function ProductDetails({productImage} : {productImage: string}) 
         </TabsContent>
       </Tabs>
     </div>
+    <CommentSection/>
+  </>
   );
 }

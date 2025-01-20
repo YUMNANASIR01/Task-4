@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useAtom } from "jotai";
 import { cartNumber } from "@/globalState/globalState";
 
+
 function Spmain(props: {
   id: string;
   productName: string;
@@ -89,6 +90,7 @@ function Spmain(props: {
   }
 
   return (
+    <>
     <div className="relative w-full mt-[30px] mb-[100px] px-4 md:px-6 lg:px-10">
       {cartVisible && (
         <>
@@ -265,6 +267,7 @@ function Spmain(props: {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

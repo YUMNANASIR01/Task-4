@@ -4,6 +4,8 @@ import { ProductCard } from '../productCard/productCard'
 import Link from 'next/link'
 
 export interface Product {
+  salePercentage: any;
+  name: string;
   imageUrl: string;
   price: number;
   tags: string[];
