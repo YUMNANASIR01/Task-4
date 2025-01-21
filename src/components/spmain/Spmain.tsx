@@ -85,7 +85,7 @@ function Spmain(props: {
     toast.success("Item Added to Wishlist");
     const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
     wishlist.push({ id, productName, productImage, productPrice });
-    // console.log( id, productName, productImage, productPrice ,"💜");
+    
     
 
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
@@ -274,3 +274,5 @@ function Spmain(props: {
 }
 
 export default Spmain;
+
+
