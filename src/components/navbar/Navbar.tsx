@@ -86,12 +86,14 @@ export default function Navbar() {
               <UserCircle className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
         </Link>
-            <button
+          <Link href={'/shop'}>
+          <button
               aria-label="Search"
               className="p-2 hover:bg-black/5 rounded-full transition-colors"
             >
               <Search className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
+          </Link>
             <Link href={'/whishlist'} >
            <button
                 aria-label="Wishlist"
