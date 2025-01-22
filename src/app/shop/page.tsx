@@ -1,5 +1,4 @@
 
-
 import Image from "next/image"
 import { Heart, Share2, BarChart2, ShoppingCart } from 'lucide-react'
 import { Button } from "@/components/ui/button"
