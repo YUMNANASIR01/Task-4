@@ -1,12 +1,14 @@
 {
   "name": "quarter2-hackathon",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "import-data": "node script/importData.js"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.4",

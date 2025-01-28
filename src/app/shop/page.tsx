@@ -1,27 +1,46 @@
 
-import Image from "next/image"
-import { Heart, Share2, BarChart2, ShoppingCart } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
-import Shopbottombar from "@/components/shopBottomBar/Shopbottombar"
-import { Product } from "@/components/ourproducts/OurProducts"
-// import { products } from "@/constant/pro1"
-export default async function ProductGrid() {
-  let products: Product[] = [];
-  let errorMessage = "";
+'use client'
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { Heart, Share2, BarChart2, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import Shopbottombar from "@/components/shopBottomBar/Shopbottombar";
+import { Product } from "@/components/ourproducts/OurProducts";
+import { client } from "@/sanity/lib/client";
 
-  try {
-    const res = await fetch("https://template6-six.vercel.app/api/products");
-    if (!res.ok) {
-      throw new Error("Failed to fetch products");
-    }
-    products = await res.json();
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    errorMessage = "Unable to load products. Please try again later.";
-  }
+export default function ProductGrid() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Fetch products using the Sanity query
+        const data = await client.fetch(`*[_type == 'product']{
+          _id,
+          title,
+          price,
+          description,
+          discountPercentage,
+          isNew,
+          "imageUrl": productImage.asset->url,
+          tags
+        }`);
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setErrorMessage("Unable to load products. Please try again later.");
+      } finally {
+        setIsLoading(false); // Stop loading spinner
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <>
@@ -44,7 +63,9 @@ export default async function ProductGrid() {
 
       {/* Main Product Block */}
       <div className="container mx-auto p-4 md:p-6">
-        {errorMessage ? (
+        {isLoading ? (
+          <div className="text-center text-gray-500 text-lg">Loading products...</div>
+        ) : errorMessage ? (
           <div className="text-center text-red-500 text-lg">{errorMessage}</div>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -53,7 +74,7 @@ export default async function ProductGrid() {
                 <div className="relative aspect-square">
                   <Image
                     src={product.imageUrl}
-                    alt={"image"}
+                    alt={product.title}
                     fill
                     className="object-cover transition-transform group-hover:scale-105"
                   />
@@ -108,7 +129,7 @@ export default async function ProductGrid() {
             ))}
           </div>
         )}
-        {!errorMessage && (
+        {!errorMessage && products.length > 0 && (
           <div className="mt-8 flex justify-center gap-2 flex-wrap">
             <Button variant="outline" className="w-12">
               1
@@ -130,4 +151,9 @@ export default async function ProductGrid() {
     </>
   );
 }
+
+
+
+
+
 
