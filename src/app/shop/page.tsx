@@ -109,10 +109,10 @@ export default function ProductGrid() {
                 </CardContent>
                 <CardFooter className="flex flex-col items-start gap-4 p-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold">Rs.{product.price}</span>
+                    <span className="text-lg font-bold">$ {product.price}</span>
                     {product.price && (
                       <span className="text-sm text-gray-500 line-through">
-                        Rs. {(product.price * 1.2).toFixed(2)}
+                        $ {(product.price * 1.2).toFixed(2)}
                       </span>
                     )}
                   </div>
